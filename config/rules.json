@@ -1,0 +1,9 @@
+{
+  "max_overall_drop": 0.05,
+  "max_tag_drop": 0.10,
+  "max_flips": 5,
+  "min_tag_cases": 5,
+  "stat_guard": true,
+  "alpha": 0.05,
+  "tag_alpha": 0.10
+}

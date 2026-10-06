@@ -1,0 +1,3 @@
+pytest>=8
+# Optional, only for live mode (AnthropicProvider). Not needed for tests or the demo:
+# anthropic>=0.40

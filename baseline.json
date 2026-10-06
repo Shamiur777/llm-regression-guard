@@ -1,0 +1,1597 @@
+{
+ "meta": {
+  "feature": "support-triage",
+  "prompt_files": [
+   "prompts\\triage.txt"
+  ],
+  "prompt_sha": "27444b3b82d0",
+  "model": {
+   "name": "claude-sonnet-5-5",
+   "temperature": 0
+  },
+  "provider": "MockProvider",
+  "created_at": "2026-10-06T00:40:42+00:00"
+ },
+ "metrics": {
+  "overall": {
+   "n": 81,
+   "score": 0.9293447293447293,
+   "pass_rate": 0.8205128205128205
+  },
+  "tags": {
+   "billing": {
+    "n": 14,
+    "score": 0.9400000000000001,
+    "pass_rate": 0.85
+   },
+   "bug": {
+    "n": 13,
+    "score": 0.9368421052631579,
+    "pass_rate": 0.8421052631578947
+   },
+   "cancellation": {
+    "n": 13,
+    "score": 0.9017543859649123,
+    "pass_rate": 0.7368421052631579
+   },
+   "easy": {
+    "n": 75,
+    "score": 0.9435435435435435,
+    "pass_rate": 0.8558558558558559
+   },
+   "feature_request": {
+    "n": 13,
+    "score": 0.8736842105263158,
+    "pass_rate": 0.6842105263157895
+   },
+   "hard": {
+    "n": 6,
+    "score": 0.6666666666666666,
+    "pass_rate": 0.16666666666666666
+   },
+   "login": {
+    "n": 12,
+    "score": 0.9555555555555555,
+    "pass_rate": 0.8888888888888888
+   },
+   "other": {
+    "n": 3,
+    "score": 1.0,
+    "pass_rate": 1.0
+   },
+   "shipping": {
+    "n": 13,
+    "score": 0.9578947368421052,
+    "pass_rate": 0.8947368421052632
+   },
+   "sla": {
+    "n": 18,
+    "score": 0.9814814814814815,
+    "pass_rate": 0.9444444444444444
+   }
+  }
+ },
+ "results": [
+  {
+   "id": "t001",
+   "input": "URGENT: I was charged twice for my last order.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t002",
+   "input": "My invoice shows a total I do not recognise. Please fix this asap.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'shipping', want 'billing'",
+    "regex.reply: pattern '(?i)invoice|refund|billing'"
+   ]
+  },
+  {
+   "id": "t003",
+   "input": "Please send me a refund for the damaged lamp. No rush on this.",
+   "expected": {
+    "category": "billing",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t004",
+   "input": "The payment page took my card but the order never appeared.",
+   "expected": {
+    "category": "billing",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t005",
+   "input": "URGENT: I was billed for a plan I never chose.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t006",
+   "input": "Can I get a receipt for my purchase in March? Please fix this asap.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t007",
+   "input": "The discount code was ignored on my invoice. No rush on this.",
+   "expected": {
+    "category": "billing",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t008",
+   "input": "I would like a refund because the item was not as described.",
+   "expected": {
+    "category": "billing",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t009",
+   "input": "URGENT: There is an extra charge on my statement from your store.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t010",
+   "input": "My payment failed but the money left my account. Please fix this asap.",
+   "expected": {
+    "category": "billing",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t011",
+   "input": "The invoice has the wrong company name on it. No rush on this.",
+   "expected": {
+    "category": "billing",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t012",
+   "input": "I need a corrected receipt for my accountant.",
+   "expected": {
+    "category": "billing",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t013",
+   "input": "URGENT: I forgot my password and the reset email never arrives.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t014",
+   "input": "I am locked out of my account after too many tries. Please fix this asap.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t015",
+   "input": "The verification code never reaches my phone. No rush on this.",
+   "expected": {
+    "category": "login",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t016",
+   "input": "I cannot sign in with my new email address.",
+   "expected": {
+    "category": "login",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t017",
+   "input": "URGENT: My 2fa app shows a code that is always rejected.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t018",
+   "input": "Every time I try to log in the page just reloads. Please fix this asap.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t019",
+   "input": "I changed my password and now it says it is invalid. No rush on this.",
+   "expected": {
+    "category": "login",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t020",
+   "input": "Please help me sign in, the form says my account does not exist.",
+   "expected": {
+    "category": "login",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t021",
+   "input": "URGENT: I lost my phone and need to move my 2fa to a new one.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t022",
+   "input": "The login link in the welcome email has expired. Please fix this asap.",
+   "expected": {
+    "category": "login",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'login'",
+    "regex.reply: pattern '(?i)password|sign.?in|access'"
+   ]
+  },
+  {
+   "id": "t023",
+   "input": "I keep getting logged out and have to sign in again every minute. No rush on this.",
+   "expected": {
+    "category": "login",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t024",
+   "input": "My password reset link says it was already used.",
+   "expected": {
+    "category": "login",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "login",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t025",
+   "input": "URGENT: My package has not arrived and it was due last Monday.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t026",
+   "input": "The tracking page has shown the same status for five days. Please fix this asap.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t027",
+   "input": "The courier left my delivery at the wrong address. No rush on this.",
+   "expected": {
+    "category": "shipping",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t028",
+   "input": "My order shipped but the tracking number does not work.",
+   "expected": {
+    "category": "shipping",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"login\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry you cannot get in. We have sent steps to reset your password and restore access to your account.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'login', want 'shipping'",
+    "regex.reply: pattern '(?i)delivery|package|tracking'"
+   ]
+  },
+  {
+   "id": "t029",
+   "input": "URGENT: The delivery arrived with a crushed box.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t030",
+   "input": "I only received two of the three items that shipped. Please fix this asap.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t031",
+   "input": "The courier says nobody was home but I was there all day. No rush on this.",
+   "expected": {
+    "category": "shipping",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t032",
+   "input": "Can the package be redirected to my office address?",
+   "expected": {
+    "category": "shipping",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t033",
+   "input": "URGENT: My delivery date moved three times this week.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t034",
+   "input": "The parcel arrived but the contents are for another customer. Please fix this asap.",
+   "expected": {
+    "category": "shipping",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t035",
+   "input": "Tracking says delivered but I have nothing. No rush on this.",
+   "expected": {
+    "category": "shipping",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t036",
+   "input": "The courier asked me to pay a fee on delivery.",
+   "expected": {
+    "category": "shipping",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "shipping",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t037",
+   "input": "URGENT: The app crash happens every time I open the cart.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t038",
+   "input": "I get an error when I upload a profile photo. Please fix this asap.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t039",
+   "input": "The checkout button is broken on my phone. No rush on this.",
+   "expected": {
+    "category": "bug",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t040",
+   "input": "The product page keeps not loading on mobile data.",
+   "expected": {
+    "category": "bug",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'billing', want 'bug'",
+    "regex.reply: pattern '(?i)bug|fix|engineer'"
+   ]
+  },
+  {
+   "id": "t041",
+   "input": "URGENT: The search screen freezes after I type two letters.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t042",
+   "input": "There is a bug where my wishlist shows empty items. Please fix this asap.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t043",
+   "input": "The site shows a blank page after I apply a filter. No rush on this.",
+   "expected": {
+    "category": "bug",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'bug'",
+    "regex.reply: pattern '(?i)bug|fix|engineer'"
+   ]
+  },
+  {
+   "id": "t044",
+   "input": "The order history page throws an error with a long list.",
+   "expected": {
+    "category": "bug",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t045",
+   "input": "URGENT: The app crash started after the latest update.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t046",
+   "input": "Saved addresses are broken, they all show the same street. Please fix this asap.",
+   "expected": {
+    "category": "bug",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t047",
+   "input": "The language switch is broken and resets to English. No rush on this.",
+   "expected": {
+    "category": "bug",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t048",
+   "input": "The notification badge freezes at 9 and never clears.",
+   "expected": {
+    "category": "bug",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "bug",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t049",
+   "input": "URGENT: Please cancel my subscription before the next renewal.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "cancellation",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 0.6666666666666666,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'cancellation'",
+    "regex.reply: pattern '(?i)cancel'"
+   ]
+  },
+  {
+   "id": "t050",
+   "input": "I want to unsubscribe from the monthly box. Please fix this asap.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'feature_request', want 'cancellation'",
+    "regex.reply: pattern '(?i)cancel'"
+   ]
+  },
+  {
+   "id": "t051",
+   "input": "Please close my account and delete my saved data. No rush on this.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t052",
+   "input": "I need to stop my subscription starting next month.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t053",
+   "input": "URGENT: Cancel my order, I ordered the wrong size.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t054",
+   "input": "How do I cancel the annual plan? Please fix this asap.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t055",
+   "input": "I would like to unsubscribe from all marketing emails. No rush on this.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t056",
+   "input": "Cancel the standing order for coffee beans please.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t057",
+   "input": "URGENT: I want to close my account, I no longer shop with you.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t058",
+   "input": "Please cancel the gift subscription I bought by mistake. Please fix this asap.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t059",
+   "input": "Can you cancel my membership and confirm by email? No rush on this.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t060",
+   "input": "I want to unsubscribe from the weekly deals newsletter.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"cancellation\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"We are sorry to see you go. We have started your cancel request and will confirm by email.\"}",
+   "tags": [
+    "cancellation",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t061",
+   "input": "URGENT: It would be great to have a dark mode in the app.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t062",
+   "input": "My wish is a way to save several delivery addresses. Please fix this asap.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'shipping', want 'feature_request'",
+    "regex.reply: pattern '(?i)feature|suggest|roadmap'"
+   ]
+  },
+  {
+   "id": "t063",
+   "input": "A suggestion: let us reorder a past basket in one tap. No rush on this.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t064",
+   "input": "Please add support for paying with bank transfer.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t065",
+   "input": "URGENT: Could you add a feature to compare two products side by side?",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t066",
+   "input": "It would be great if the app could show prices in my currency. Please fix this asap.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t067",
+   "input": "I wish the wishlist could be shared with friends. No rush on this.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t068",
+   "input": "A suggestion for the team: add size guides to every page.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t069",
+   "input": "URGENT: Please add a button to export my order history.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy",
+    "sla"
+   ],
+   "weight": 2.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t070",
+   "input": "A feature to schedule a delivery time would help a lot. Please fix this asap.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "high",
+    "sla_hours": 4
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"high\", \"sla_hours\": 4, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 2.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'shipping', want 'feature_request'",
+    "regex.reply: pattern '(?i)feature|suggest|roadmap'"
+   ]
+  },
+  {
+   "id": "t071",
+   "input": "It would be great to filter products by rating. No rush on this.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"feature_request\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for the suggestion. We have passed this feature idea to the product team for the roadmap.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t072",
+   "input": "Please add a way to leave notes for the courier.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"shipping\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Sorry about the wait. We are checking the tracking details with the courier and the delivery status will follow shortly.\"}",
+   "tags": [
+    "feature_request",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'shipping', want 'feature_request'",
+    "regex.reply: pattern '(?i)feature|suggest|roadmap'"
+   ]
+  },
+  {
+   "id": "t073",
+   "input": "My money vanished after the update, what is going on?",
+   "expected": {
+    "category": "billing",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "billing",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'billing'",
+    "regex.reply: pattern '(?i)invoice|refund|billing'"
+   ]
+  },
+  {
+   "id": "t074",
+   "input": "Hello, I would like to leave your service next month.",
+   "expected": {
+    "category": "cancellation",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "cancellation",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'cancellation'",
+    "regex.reply: pattern '(?i)cancel'"
+   ]
+  },
+  {
+   "id": "t075",
+   "input": "Where is my stuff? It has been two weeks.",
+   "expected": {
+    "category": "shipping",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "shipping",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'shipping'",
+    "regex.reply: pattern '(?i)delivery|package|tracking'"
+   ]
+  },
+  {
+   "id": "t076",
+   "input": "The app does not do what I expect when I tap save.",
+   "expected": {
+    "category": "bug",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "bug",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'other', want 'bug'",
+    "regex.reply: pattern '(?i)bug|fix|engineer'"
+   ]
+  },
+  {
+   "id": "t077",
+   "input": "Can you also support dark mode? Not a bug, just a wish.",
+   "expected": {
+    "category": "feature_request",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"bug\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for reporting this bug. An engineer is looking into a fix and we will update you soon.\"}",
+   "tags": [
+    "feature_request",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 0.6,
+   "passed": false,
+   "details": [
+    "exact.category: got 'bug', want 'feature_request'",
+    "regex.reply: pattern '(?i)feature|suggest|roadmap'"
+   ]
+  },
+  {
+   "id": "t078",
+   "input": "Do you have a shop in Dhaka?",
+   "expected": {
+    "category": "other",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "other",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t079",
+   "input": "Thanks for the quick help yesterday!",
+   "expected": {
+    "category": "other",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "other",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t080",
+   "input": "Can I get a copy of your partnership brochure? No rush.",
+   "expected": {
+    "category": "other",
+    "priority": "low",
+    "sla_hours": 72
+   },
+   "output": "{\"category\": \"other\", \"priority\": \"low\", \"sla_hours\": 72, \"reply\": \"Thanks for your message. A member of our team will take a look and get back to you.\"}",
+   "tags": [
+    "other",
+    "easy"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  },
+  {
+   "id": "t081",
+   "input": "I was charged twice and now I cannot log in to check.",
+   "expected": {
+    "category": "billing",
+    "priority": "normal",
+    "sla_hours": 24
+   },
+   "output": "{\"category\": \"billing\", \"priority\": \"normal\", \"sla_hours\": 24, \"reply\": \"Thanks for contacting billing support. We are reviewing your invoice and will confirm any refund within one business day.\"}",
+   "tags": [
+    "billing",
+    "hard"
+   ],
+   "weight": 1.0,
+   "score": 1.0,
+   "passed": true,
+   "details": []
+  }
+ ]
+}

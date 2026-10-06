@@ -1,0 +1,7 @@
+{
+  "name": "support-triage",
+  "prompt_files": ["prompts/triage.txt"],
+  "dataset": "data/golden_triage.jsonl",
+  "model": {"name": "claude-sonnet-5-5", "temperature": 0},
+  "provider": {"type": "mock", "simulator": "triage", "noise": 0.05, "seed": 0}
+}
